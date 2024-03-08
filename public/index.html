@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Globe Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body class="bg-dark">
+    <div class="col-xxl-12 px-5 py-5 overflow-hidden">
+      <div class="row  justify-content-between align-items-center g-5 py-5 ">
+        <div class="col-lg-6">
+          <h1 class="display-5 fw-bold lh-1 mb-3 text-white">Some awesome heading</h1>
+          <p class="lead text-white">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+            <button type="button" class="btn btn-outline-primary btn-lg px-4">Default</button>
+          </div>
+        </div>
+
+        <div class="col-10 col-sm-8 col-lg-6" style="height:300px; position: relative;">
+            <div id="root-globe" style="width: 1000px; height: 1000px; position: absolute;top: -150%;right: -48%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <template id="globe-label-template">
+      <div style="width: max-content; background-color: #1B243C; padding: 16px 25px; border-radius: 10px;">
+          <div class="text-white">
+            <span class="opacity-50">Estimated time of arrival</span>
+            <h5>{{ data.eta }}</h5>
+          </div>
+          <div class="text-white mt-2">
+            <span class="opacity-50">Coordinates</span>
+            <h5>{{ data.coordinates }}</h5>
+          </div>
+          <div class="row text-white mt-2">
+            <div class="col-6">
+              <span class="opacity-50">Temprature</span>
+              <div class="d-flex align-items-center justify-content-between">
+                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 16 16"><path fill="#f59e0b" d="M4.5 3.5a3 3 0 1 1 6 0v5.354a4 4 0 1 1-6 0zm3-1.5A1.5 1.5 0 0 0 6 3.5v5.975l-.23.22a2.5 2.5 0 1 0 3.461 0L9 9.476V3.5A1.5 1.5 0 0 0 7.5 2M8 6a.5.5 0 0 0-1 0v4.085a1.5 1.5 0 1 0 1 0z"/></svg>
+                <h5 class="m-0">{{data.temperature}}</h5>
+              </div>
+            </div>
+            <div class="col-6">
+              <span class="opacity-50">Humidity</span>
+              <div class="d-flex align-items-center justify-content-between">
+                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24"><path fill="#06b6d4" d="M12 21.5q-3.325 0-5.663-2.3T4 13.6q0-1.575.613-3.012T6.35 8.05l4.25-4.175q.3-.275.663-.425T12 3.3q.375 0 .738.15t.662.425l4.25 4.175q1.125 1.1 1.738 2.538T20 13.6q0 3.3-2.337 5.6T12 21.5m-6-7.9h12q0-1.175-.45-2.237T16.25 9.5L12 5.3L7.75 9.5q-.85.8-1.3 1.863T6 13.6"/></svg>
+                <h5 class="m-0">{{data.humidity}}</h5>
+              </div>
+            </div>
+          </div>
+      </div>
+    </template>
+
+    <template id="globe-data-json">
+      [
+          {
+              "data": {
+                  "eta": "Feb, 2nd 2024 19:50",
+                  "coordinates": "27.66 N, 81.664 W",
+                  "temperature": "28.3C",
+                  "humidity": "72%"
+              },
+              "coordinates": [
+                  -72.32834651342309,
+                  131.2843674394054,
+                  25.816376515281203,
+                  145.8584759178267
+              ]
+          },
+          {
+              "data": {
+                  "eta": "Feb, 2nd 2024 19:50",
+                  "coordinates": "27.66 N, 81.664 W",
+                  "temperature": "24.7C",
+                  "humidity": "83%"
+              },
+              "coordinates": [
+                  -38.93967157084176,
+                  -136.24336961178028,
+                  34.876614182080075,
+                  30.111516548812656
+              ]
+          },
+          {
+              "data": {
+                  "eta": "Feb, 2nd 2024 19:50",
+                  "coordinates": "27.66 N, 81.664 W",
+                  "temperature": "31.2C",
+                  "humidity": "55%"
+              },
+              "coordinates": [
+                  -13.46269293701826,
+                  -91.73940028025906,
+                  10.72545286615486,
+                  75.05115049190758
+              ]
+          },
+          {
+              "data": {
+                  "eta": "Feb, 2nd 2024 19:50",
+                  "coordinates": "27.66 N, 81.664 W",
+                  "temperature": "29.8C",
+                  "humidity": "69%"
+              },
+              "coordinates": [
+                  -55.7492125103655,
+                  -164.50730901068906,
+                  19.301875526551292,
+                  51.809100390522154
+              ]
+          },
+          {
+              "data": {
+                  "eta": "Feb, 2nd 2024 19:50",
+                  "coordinates": "27.66 N, 81.664 W",
+                  "temperature": "32.1C",
+                  "humidity": "61%"
+              },
+              "coordinates": [
+                  -50.38615374087163,
+                  116.38920446187711,
+                  27.87221307282113,
+                  194.6367417760819
+              ]
+          },
+          {
+              "data": {
+                  "eta": "Feb, 2nd 2024 19:50",
+                  "coordinates": "27.66 N, 81.664 W",
+                  "temperature": "27.5C",
+                  "humidity": "77%"
+              },
+              "coordinates": [
+                  -45.81829025232346,
+                  -2.8229223023211887,
+                  31.361591157693812,
+                  38.22805709302028
+              ]
+          }
+      ]
+    </template>
+
+    <script src="globe.iife.js?containerId=root-globe&jsonTemplateId=globe-data-json&labelTemplateId=globe-label-template"></script>
+  </body>
+</html>
