@@ -10,7 +10,7 @@ export default defineConfig({
             entry: 'main.js',
             formats: ['iife'],
             name: 'GlobeJs',
-            fileName: 'globe'
+            fileName: () => "globe.js"
         }
     }
 })
