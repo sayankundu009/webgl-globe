@@ -4,42 +4,43 @@ import Curve from './Curve';
 import Tube from './Tube';
 import { rootMesh, STATE } from './scene';
 import { CURVE_COLOR } from './constants';
+import { onElementVisible } from './utils';
 
-export function init(allCoords) {
+export function init(allCoords, context) {
   const curveMesh = new THREE.Mesh();
 
   const meshes = [];
 
   rootMesh.add(curveMesh);
-  
-  allCoords.forEach((pathObject, index) => {
-    // if (index % 2) {
-    //   const curve = new Curve(coords, material);
-    //   curveMesh.add(curve.mesh);
-    // } else {
-    //   const tube = new Tube(coords, material);
-    //   curveMesh.add(tube.mesh);
-    // }
 
-    const material = new THREE.MeshBasicMaterial({
-      blending: THREE.AdditiveBlending,
-      opacity: 0.5,
-      transparent: true,
-      color: 0xfffffff
+  onElementVisible(context.container, () => {
+    allCoords.forEach((pathObject, index) => {
+      // if (index % 2) {
+      //   const curve = new Curve(coords, material);
+      //   curveMesh.add(curve.mesh);
+      // } else {
+      //   const tube = new Tube(coords, material);
+      //   curveMesh.add(tube.mesh);
+      // }
+  
+      const material = new THREE.MeshBasicMaterial({
+        blending: THREE.AdditiveBlending,
+        opacity: 0.8,
+        transparent: true,
+        color: 0xfffffff
+      });
+  
+      const tube = new Tube(pathObject.coordinates, material);
+  
+      curveMesh.add(tube.mesh);
+  
+      setTimeout(() => {
+        meshes.push(tube.mesh);
+  
+        STATE.paths.push({ data: pathObject, path: tube });
+      }, 100 * index);
     });
-
-    const tube = new Tube(pathObject.coordinates, material);
-
-    curveMesh.add(tube.mesh);
-
-    setTimeout(() => {
-      meshes.push(tube.mesh);
-  
-      STATE.paths.push({ data: pathObject, path: tube });
-    }, 100 * index)
   });
-
- 
 
   // const raycaster = new THREE.Raycaster();
 

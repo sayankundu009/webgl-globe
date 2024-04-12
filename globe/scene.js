@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import Hammer from 'hammerjs';
-import { clamp, renderTemplate } from './utils';
+import { adjustCoordinates, clamp, renderTemplate } from './utils';
 import { GLOBE_RADIUS, PI_TWO } from './constants';
 
 let _deltaX = 0;
@@ -38,6 +38,8 @@ export function init(container, options = {}) {
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
   const screenMouse = {};
+
+  if(!isNaN(options.zoomLevel)) _cameraZ = options.zoomLevel;
 
   setTimeout(() => {
     container.addEventListener('mousemove', (event) => {
@@ -132,7 +134,7 @@ export function init(container, options = {}) {
 
   // init event listeners
   initPanListener(container);
-  initZoomListener(container);
+  // initZoomListener(container);
   initResizeListener(container, camera, renderer);
 
   resizeRenderer(container, camera, renderer);
@@ -206,7 +208,7 @@ function createHoverCard(container, labelTemplateId = null) {
     template = templateElement.innerHTML
   }
 
-  function renderLabelTemplate(data = {}){
+  function renderLabelTemplate(data = {}) {
     const renderedTemplate = renderTemplate(template, { data });
 
     element.innerHTML = renderedTemplate;
@@ -227,11 +229,15 @@ function createHoverCard(container, labelTemplateId = null) {
   return {
     show(positionX, positionY, options) {
       const { data } = options;
-      
+
       renderLabelTemplate(data);
 
-      element.style.top = `${positionY + 25}px`;
-      element.style.left = `${positionX}px`;
+      const rect = element.getBoundingClientRect();
+
+      const { x, y } = adjustCoordinates(positionX, positionY + 25, rect.width, rect.height);
+
+      element.style.top = `${y}px`;
+      element.style.left = `${x}px`;
       element.style.visibility = "visible";
       element.style.opacity = "1";
     },

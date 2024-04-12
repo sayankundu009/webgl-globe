@@ -28,7 +28,7 @@ export function getSplineFromCoords(coords) {
   // spline vertices
   const start = coordinateToPosition(startLat, startLng, GLOBE_RADIUS);
   const end = coordinateToPosition(endLat, endLng, GLOBE_RADIUS);
-  const altitude = clamp(start.distanceTo(end) * .75, CURVE_MIN_ALTITUDE, CURVE_MAX_ALTITUDE);
+  const altitude = clamp(start.distanceTo(end) * .35, CURVE_MIN_ALTITUDE, CURVE_MAX_ALTITUDE);
   const interpolate = geoInterpolate([startLng, startLat], [endLng, endLat]);
   const midCoord1 = interpolate(0.25);
   const midCoord2 = interpolate(0.75);
@@ -76,9 +76,54 @@ export function renderTemplate(template, data) {
     for (const k of keys) {
       value = value[k];
     }
-    
+
     return value;
   });
 
   return renderedTemplate;
+}
+
+export function adjustCoordinates(x, y, width, height) {
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+
+  if (x + width > viewportWidth) {
+    x = viewportWidth - width;
+  }
+
+  if (y + height > viewportHeight) {
+    y = viewportHeight - height;
+  }
+
+  x = Math.max(0, x);
+  y = Math.max(0, y);
+
+  return { x, y };
+}
+
+export function onElementVisible(element, callback, once = false) {
+  let callbackExecuted = false;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !callbackExecuted) {
+        callback();
+        callbackExecuted = true;
+        observer.disconnect();
+      }
+    });
+  });
+
+  observer.observe(element);
+}
+
+export function elementIsVisible(element) {
+  const rect = element.getBoundingClientRect();
+
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
 }

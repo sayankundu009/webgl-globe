@@ -26,11 +26,13 @@ if (window.document.currentScript) {
     params = getUrlParams(scriptUrl);
 }
 
-const root = document.getElementById(params.containerId);
+const root = document.getElementById(params.containerId || 'root-globe');
 
 if(root){
     initGlobe(root, {
         labelTemplateId: params.labelTemplateId,
-        jsonTemplateId: params.jsonTemplateId
+        jsonTemplateId: params.jsonTemplateId,
+        zoomLevel: parseInt(params.zoomLevel),
+        rotationSpeed: parseInt(params.rotationSpeed)
     });
 }

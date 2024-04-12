@@ -40,8 +40,6 @@ export default function initGlobe(container, options) {
     if (options.jsonTemplateId) {
       const templateElement = document.getElementById(options.jsonTemplateId);
 
-      console.log(templateElement.innerHTML);
-
       const json = JSON.parse(templateElement.innerHTML);
 
       data = json;
@@ -49,6 +47,6 @@ export default function initGlobe(container, options) {
       // data = generateRandomCoordinates(6);
     }
 
-    initPaths(data);
+    initPaths(data, { container });
   }, 500)
 }
