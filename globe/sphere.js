@@ -10,7 +10,11 @@ export function init() {
   
   const material = new THREE.MeshPhongMaterial({
     map: loader.load('https://i.imgur.com/45naBE9.jpg'),
-    color: COLOR_SPHERE_NIGHT
+    map: loader.load('./earth-texture.jpg'),
+    map: loader.load('./earth-texture-2.jpg'),
+    map: loader.load('./earth-texture-3.jpg'),
+    map: loader.load('./earth-texture-4.jpg'),
+    // color: COLOR_SPHERE_NIGHT
   });
 
   const mesh = new THREE.Mesh(geometry, material);

@@ -129,7 +129,7 @@ export function init(container, options = {}) {
   scene.add(rootMesh);
 
   // lighting
-  const light = new THREE.HemisphereLight(0xffffff, 0xffffff, 10);
+  const light = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.93);
   scene.add(light);
 
   // init event listeners
