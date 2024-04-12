@@ -2137,7 +2137,7 @@ Object.assign(cn.prototype,{_getValue_unbound:cn.prototype.getValue,_setValue_un
     width: max-content;
     height: max-content;
     transition:  opacity 0.4s;
-  `,e.appendChild(n),{show(s,u,f){const{data:h}=f;a(h);const l=n.getBoundingClientRect(),{x:p,y:d}=D0(s,u+25,l.width,l.height);n.style.top=`${d}px`,n.style.left=`${p}px`,n.style.visibility="visible",n.style.opacity="1"},hide(){n.style.visibility="hidden",n.style.opacity="0"}}}function z0(){const e=new Yi(bs,40,30),t=new Ef,n=new er({map:t.load("https://i.imgur.com/45naBE9.jpg"),map:t.load("./earth-texture.jpg"),map:t.load("./earth-texture-2.jpg"),map:t.load("./earth-texture-3.jpg"),map:t.load("./earth-texture-4.jpg")}),r=new jt(e,n);nr.add(r)}var Ko={exports:{}};/**
+  `,e.appendChild(n),{show(s,u,f){const{data:h}=f;a(h);const l=n.getBoundingClientRect(),{x:p,y:d}=D0(s,u+25,l.width,l.height);n.style.top=`${d}px`,n.style.left=`${p}px`,n.style.visibility="visible",n.style.opacity="1"},hide(){n.style.visibility="hidden",n.style.opacity="0"}}}function z0(){const e=new Yi(bs,40,30),t=new Ef,n=new er({map:t.load("https://cdn.jsdelivr.net/gh/sayankundu009/webgl-globe/dist/earth-texture-4.jpg")}),r=new jt(e,n);nr.add(r)}var Ko={exports:{}};/**
  * @license
  * Lodash <https://lodash.com/>
  * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>

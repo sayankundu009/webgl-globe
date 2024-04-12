@@ -9,11 +9,12 @@ export function init() {
   const loader = new THREE.TextureLoader();
   
   const material = new THREE.MeshPhongMaterial({
-    map: loader.load('https://i.imgur.com/45naBE9.jpg'),
-    map: loader.load('./earth-texture.jpg'),
-    map: loader.load('./earth-texture-2.jpg'),
-    map: loader.load('./earth-texture-3.jpg'),
-    map: loader.load('./earth-texture-4.jpg'),
+    // map: loader.load('https://i.imgur.com/45naBE9.jpg'),
+    // map: loader.load('./earth-texture.jpg'),
+    // map: loader.load('./earth-texture-2.jpg'),
+    // map: loader.load('./earth-texture-3.jpg'),
+    // map: loader.load('/earth-texture-4.jpg'),
+    map: loader.load('https://cdn.jsdelivr.net/gh/sayankundu009/webgl-globe/dist/earth-texture-4.jpg'),
     // color: COLOR_SPHERE_NIGHT
   });
 
