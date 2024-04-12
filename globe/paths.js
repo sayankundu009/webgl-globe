@@ -25,8 +25,8 @@ export function init(allCoords, context) {
   
       const material = new THREE.MeshBasicMaterial({
         blending: THREE.AdditiveBlending,
-        opacity: 0.8,
-        transparent: true,
+        opacity: 1,
+        transparent: false,
         color: 0xfffffff
       });
   

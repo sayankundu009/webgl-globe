@@ -19,7 +19,7 @@ export function init() {
 
   const mesh = new THREE.Mesh(geometry, material);
   
-  mesh.rotateY(Math.PI);
-  mesh.rotateX(100);
+  // mesh.rotateY(Math.PI);
+  // mesh.rotateX(100);
   rootMesh.add(mesh);
 }

@@ -94,6 +94,10 @@ export function init(container, options = {}) {
     });
   }, 2000)
 
+  // Default rotation
+  rootMesh.rotation.x = 0.49826628687325725;
+  rootMesh.rotation.y = 2.9990576315611692;
+
   // main animation loop
   const play = () => {
     // rotation
