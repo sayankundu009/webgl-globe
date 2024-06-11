@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import Hammer from 'hammerjs';
-import { adjustCoordinates, clamp, renderTemplate } from './utils';
+import { adjustCoordinates, clamp, debounce, renderTemplate, throttle } from './utils';
 import { GLOBE_RADIUS, PI_TWO } from './constants';
 
 let _deltaX = 0;
@@ -42,6 +42,9 @@ export function init(container, options = {}) {
   if(!isNaN(options.zoomLevel)) _cameraZ = options.zoomLevel;
 
   setTimeout(() => {
+    const cleanUp = throttle((callback) => callback(), 450);
+    let isInteracting = false;
+
     container.addEventListener('mousemove', (event) => {
       const rect = STATE.container.getBoundingClientRect();
       const mouseX = (event.clientX - rect.left) / rect.width * 2 - 1;
@@ -56,7 +59,13 @@ export function init(container, options = {}) {
       screenMouse.clientX = event.clientX;
       screenMouse.clientY = event.clientY;
 
-      let isInteracting = false;
+      if(isInteracting){
+        cleanUp(() => {
+          isInteracting = false;
+        });
+
+        return;
+      }
 
       raycaster.setFromCamera(mouse, STATE.camera);
 
